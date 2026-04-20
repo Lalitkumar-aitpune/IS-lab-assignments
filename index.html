@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>enter prime number</label>
+    <input id="primeNumber" type="number" placeholder="">
+
+    <label>enter  primitive</label>
+    <input id="primitiveRoot" type="number" placeholder="">
+
+    <label>enter private key of alice</label>
+    <input id="alicePrivateKey" type="number" placeholder="">
+
+    <button  onclick="calculate()">Generate</button>
+
+    <h3 id="output"></h3>
+</body>
+<script>
+function calculate(){
+    let q = parseInt(document.getElementById('primeNumber').value);
+    let p = parseInt(document.getElementById('primitiveRoot').value);
+    let a = parseInt(document.getElementById('alicePrivateKey').value);
+
+    // public keys
+    let A = Math.pow(p,a)%q;
+    let b = 10; // bob private key
+    let B = Math.pow(p,b)%q;
+
+    // secreat key
+    let aliceSecretKey = Math.pow(B,a)%q;
+    let bobSecretKey = Math.pow(A,b)%q;
+    
+    let res = document.getElementById('output');
+    res.innerHTML = 
+                "Alice Public Key = " + A + "<br>" +
+                "Bob Public Key = " + B + "<br>" +
+                "Alice Secret Key = " + aliceSecretKey + "<br>" +
+                "Bob Secret Key = " + bobSecretKey;
+}
+</script>
+</html>
